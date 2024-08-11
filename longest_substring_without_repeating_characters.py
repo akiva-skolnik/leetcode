@@ -2,17 +2,20 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         """Given a string s, find the length of the longest substring without repeating characters."""
+        last_loc = {}
+        if s:
+            last_loc[s[0]] = 0
         start = 0
         end = 1
-        longest = 0 if len(s) != 1 else 1
+        longest = 0 if not s else 1
         while end < len(s):
-            for i in range(start, end):
-                if s[i] == s[end]:
-                    longest = max(longest, i - start + 1)
-                    start = end = i + 1
-                    break
-                else:
-                    longest = max(longest, i - start + 2)
+            if last_loc.get(s[end], -1) >= start:
+                i = last_loc[s[end]]
+                longest = max(longest, i - start)
+                start = i + 1
+            else:
+                longest = max(longest, end - start + 1)
+            last_loc[s[end]] = end
             end += 1
 
         return longest
