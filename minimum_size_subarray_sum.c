@@ -9,9 +9,6 @@ int minSubArrayLen(int target, int* nums, int numsSize) {
             if (sub_sum < target)
                 break;
 
-            while (sub_sum - nums[low] >= target)
-                sub_sum -= nums[low++];
-
             sub_min = high - low + 1;
             if (!global_min || sub_min < global_min)
                 global_min = sub_min;
