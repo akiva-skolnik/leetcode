@@ -1,6 +1,8 @@
 # https://leetcode.com/problems/climbing-stairs
 class Solution:
-    def climbStairs(self, n: int) -> int:
+    def climbStairs1(self, n: int) -> int:
+        """You are climbing a staircase. It takes n steps to reach the top.
+        Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?"""
         cache = [0] * n
         for i in range(n - 1, -1, -1):
             if i == n - 1:
@@ -10,6 +12,19 @@ class Solution:
             else:
                 cache[i] = cache[i + 1] + cache[i + 2]
         return cache[0]
+
+    def climbStairs(self, n: int) -> int:
+        # Fibonacci sequence
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        n1 = 1
+        n2 = 2
+        for _ in range(n - 2):
+            n1, n2 = n2, n1 + n2
+
+        return n2
 
 
 def test_solution():
