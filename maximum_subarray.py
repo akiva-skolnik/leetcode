@@ -4,11 +4,14 @@ from typing import List
 # https://leetcode.com/problems/maximum-subarray
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        sub_sums = [nums[0]]
+        """Given an integer array nums, find the subarray with the largest sum, and return its sum."""
+        m = nums[0]
         for i in range(1, len(nums)):
-            sub_sums.append(max(nums[i], sub_sums[i - 1] + nums[i]))
+            if nums[i - 1] > 0:
+                nums[i] += nums[i - 1]
+            m = max(m, nums[i])
 
-        return max(sub_sums)
+        return m
 
 
 def test_1():
