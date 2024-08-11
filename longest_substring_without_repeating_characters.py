@@ -3,10 +3,10 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         """Given a string s, find the length of the longest substring without repeating characters."""
         last_loc: dict = {}
-        start = 0
-        longest = 0
+        start: int = 0
+        longest: int = 0
         for end in range(len(s)):
-            c = s[end]
+            c: str = s[end]
             if last_loc.get(c, -1) >= start:
                 start = last_loc[c] + 1
             else:
