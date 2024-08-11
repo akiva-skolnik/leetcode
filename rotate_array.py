@@ -5,7 +5,7 @@ from typing import List
 class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
         i = len(nums) - (k % len(nums))
-        nums[i:], nums[:i] = nums[:i], nums[i:]
+        nums[:] = nums[i:] + nums[:i]
 
 
 def test_rotate_1():
