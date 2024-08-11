@@ -7,21 +7,13 @@ class Solution:
         """Given an integer array nums sorted in non-decreasing order,
             remove some duplicates in-place such that each unique element appears at most twice.
             The relative order of the elements should be kept the same."""
-        n = len(nums)
-        if n <= 2:
-            return n
+        if len(nums) <= 2:
+            return len(nums)
         k = 2
-
-        while k < n:
-            if nums[k - 2] == nums[k - 1] and nums[k - 1] == nums[k]:
-                i = k
-                while i < n and nums[i] == nums[k]:
-                    i += 1
-                if i == n:
-                    return k
-                nums[k:k + n - i] = nums[i:n]
-                n -= i - k
-            k += 1
+        for i in range(2, len(nums)):
+            if nums[i] != nums[k-2]:
+                nums[k] = nums[i]
+                k += 1
         return k
 
 
