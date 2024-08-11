@@ -1,22 +1,16 @@
 from functools import lru_cache
 from typing import List
 
-
 # https://leetcode.com/problems/triangle
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         """Given a triangle array, return the minimum path sum from top to bottom.
         For each step, you may move to an adjacent number of the row below."""
-        self.triangle: tuple[tuple, ...] = tuple(tuple(x) for x in triangle)
-        return self.minimumTotalCached(0, 0)
+        for i in range(len(triangle) - 2, -1, -1):
+            for j in range(len(triangle[i])):
+                triangle[i][j] += min(triangle[i + 1][j], triangle[i + 1][j + 1])
 
-    @lru_cache(maxsize=None)  # can't cache list of lists as it's not hashable, so we convert it to tuple of tuples
-    def minimumTotalCached(self, i: int, j: int) -> int:
-        triangle = self.triangle
-        if i == len(triangle) or not (0 <= j < len(triangle[i])):
-            return 0
-        return triangle[i][j] + min(self.minimumTotalCached(i + 1, j),
-                                    self.minimumTotalCached(i + 1, j + 1))
+        return triangle[0][0]
 
 
 def test_1():
