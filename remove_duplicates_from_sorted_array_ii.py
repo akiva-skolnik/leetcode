@@ -17,11 +17,12 @@ class Solution:
         return k
 
 
-def test():
+def test_1():
     nums = [1, 1, 1, 2, 2, 3]
     assert Solution().removeDuplicates(nums) == 5
     assert nums[:5] == [1, 1, 2, 2, 3]
 
+def test_2():
     nums = [0, 0, 1, 1, 1, 1, 2, 3, 3]
     assert Solution().removeDuplicates(nums) == 7
     assert nums[:7] == [0, 0, 1, 1, 2, 3, 3]
