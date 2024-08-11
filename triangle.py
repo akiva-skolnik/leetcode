@@ -1,16 +1,16 @@
-from functools import lru_cache
 from typing import List
+
 
 # https://leetcode.com/problems/triangle
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         """Given a triangle array, return the minimum path sum from top to bottom.
         For each step, you may move to an adjacent number of the row below."""
-        for i in range(len(triangle) - 2, -1, -1):
-            for j in range(len(triangle[i])):
-                triangle[i][j] += min(triangle[i + 1][j], triangle[i + 1][j + 1])
-
-        return triangle[0][0]
+        sub_sum = [0] * (len(triangle) + 1)  # from i j to bottom
+        for i in range(len(triangle) - 1, -1, -1):
+            for j in range(i + 1):
+                sub_sum[j] = triangle[i][j] + min(sub_sum[j], sub_sum[j + 1])
+        return sub_sum[0]
 
 
 def test_1():
