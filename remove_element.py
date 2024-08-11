@@ -19,4 +19,4 @@ class Solution:
 def test():
     nums = [0, 1, 2, 2, 3, 0, 4, 2]
     assert Solution().removeElement(nums, 2) == 5
-    assert nums == [0, 1, 3, 0, 4]
+    assert sorted(nums[:5]) == sorted([0, 1, 3, 0, 4])
