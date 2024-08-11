@@ -10,9 +10,7 @@ class Solution:
         longest = 0 if not s else 1
         while end < len(s):
             if last_loc.get(s[end], -1) >= start:
-                i = last_loc[s[end]]
-                longest = max(longest, i - start)
-                start = i + 1
+                start = last_loc[s[end]] + 1
             else:
                 longest = max(longest, end - start + 1)
             last_loc[s[end]] = end
