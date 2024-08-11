@@ -2,7 +2,15 @@
 class Solution:
     def myPow(self, x: float, n: int) -> float:
         """Implement pow(x, n), which calculates x raised to the power n (i.e., x^n)."""
-        return x ** n
+        if x == 0:
+            return 0
+        if n < 0:
+            x = 1 / x
+
+        res = 1
+        for i in range(abs(n)):
+            res *= x
+        return res
 
 
 def test_1():
