@@ -6,7 +6,7 @@ from typing import List
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         """Given an array nums of distinct integers, return all the possible permutations."""
-        return list(permutations(nums))
+        return list(list(x) for x in permutations(nums))
 
 
 def test_1():
