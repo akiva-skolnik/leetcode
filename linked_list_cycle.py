@@ -10,6 +10,7 @@ class ListNode:
 # https://leetcode.com/problems/linked-list-cycle
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
+        """Given head, the head of a linked list, determine if the linked list has a cycle in it."""
         visited = []
         while head:
             if head in visited:
@@ -18,6 +19,18 @@ class Solution:
             head = head.next
         return False
 
+    def hasCycle2(self, head: Optional[ListNode]) -> bool:
+        # if there is a cycle, slow and fast will meet at some point, and if there is no cycle, fast will reach the end.
+        if not head or not head.next:
+            return False
+        slow = head
+        fast = head.next
+        while slow != fast:
+            if not fast or not fast.next:
+                return False
+            slow = slow.next
+            fast = fast.next.next
+        return True
 
 
 def test_1():
