@@ -15,6 +15,17 @@ class Solution:
                 i += 1
         return intervals
 
+    def merge2(self, intervals: List[List[int]]) -> List[List[int]]:
+        # optimize time
+        intervals.sort()
+        merged = [intervals[0]]
+        for i in range(1, len(intervals)):
+            if merged[-1][1] < intervals[i][0]:
+                merged.append(intervals[i])
+            elif merged[-1][1] < intervals[i][1]:
+                merged[-1][1] = intervals[i][1]
+        return merged
+
 
 def test_1():
     intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
