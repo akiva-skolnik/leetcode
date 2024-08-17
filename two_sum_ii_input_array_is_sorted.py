@@ -4,6 +4,24 @@ from typing import List
 # https://leetcode.com/problems/two-sum-ii-input-array-is-sorted
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        """Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order,
+            find two numbers such that they add up to a specific target number.
+            Return the indices of the two numbers, index1 and index2, added by one.
+            Assume there is exactly one solution. You may not use the same element twice."""
+        # two pointers approach:
+        left = 0
+        right = len(numbers) - 1
+        while left < right:
+            t = numbers[left] + numbers[right]
+            if t == target:
+                return [left + 1, right + 1]
+            elif t > target:
+                right -= 1
+            else:
+                left += 1
+
+    def twoSum2(self, numbers: List[int], target: int) -> List[int]:
+        # binary search approach:
         for i in range(len(numbers)):
             second_index = self.binary_search(numbers, i + 1, len(numbers), target - numbers[i])
             if second_index:
