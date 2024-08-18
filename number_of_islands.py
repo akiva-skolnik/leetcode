@@ -28,14 +28,22 @@ class Solution:
         indices: Dict[Tuple[int, int], bool] = {(i, j): True for i in range(len(grid)) for j in range(len(grid[i]))}
 
         def erase_island(i: int, j: int) -> None:
-            if not (0 <= i < len(grid)) or not (0 <= j < len(grid[i])) or grid[i][j] == '0':
-                return
-            grid[i][j] = '0'
-            indices[(i, j)] = False  # don't recheck the same cell
-            erase_island(i - 1, j)
-            erase_island(i, j - 1)
-            erase_island(i + 1, j)
-            erase_island(i, j + 1)
+            stack = [(i, j)]
+            while stack:
+                x, y = stack.pop()
+                if (x, y) not in indices or not indices[(x, y)] or grid[x][y] == '0':
+                    continue
+                grid[x][y] = '0'
+                indices[(x, y)] = False
+                # Push all neighboring cells onto the stack
+                if x - 1 >= 0:
+                    stack.append((x - 1, y))
+                if x + 1 < len(grid):
+                    stack.append((x + 1, y))
+                if y - 1 >= 0:
+                    stack.append((x, y - 1))
+                if y + 1 < len(grid[0]):
+                    stack.append((x, y + 1))
 
         n_islands = 0
         for (i, j) in indices:
