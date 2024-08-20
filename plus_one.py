@@ -17,6 +17,13 @@ class Solution:
             digits.insert(0, 1)
         return digits
 
+    def plusOne2(self, digits: List[int]) -> List[int]:
+        for i in range(len(digits) - 1, -1, -1):
+            if digits[i] != 9:
+                digits[i] += 1
+                return digits
+            digits[i] = 0
+        return [1] + digits
 
 def test_1():
     assert Solution().plusOne([1, 2, 3]) == [1, 2, 4]
