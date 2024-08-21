@@ -14,6 +14,15 @@ class Solution:
                 return prefix
         return ""
 
+    def gcdOfStrings1(self, str1: str, str2: str) -> str:
+        if len(str2) < len(str1):
+            # make str1 the shorter one
+            str1, str2 = str2, str1
+
+        return next((str1[:i] for i in range(len(str1), 0, -1) if
+                     len(str1) % i == 0 and all(str1[:i] == str1[i * k:i * (k + 1)] for k in range(len(str1) // i)) and \
+                     len(str2) % i == 0 and all(str1[:i] == str2[i * k:i * (k + 1)] for k in range(len(str2) // i))), "")
+
 
 def test_1():
     assert Solution().gcdOfStrings("ABCABC", "ABC") == "ABC"
