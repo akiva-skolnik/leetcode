@@ -22,6 +22,12 @@ class Solution:
                 output_per_length[length][index].append(s)
         return list(itertools.chain.from_iterable(output_per_length.values()))
 
+    def groupAnagrams2(self, strs: List[str]) -> List[List[str]]:
+        anagrams = defaultdict(list)
+        for s in strs:
+            anagrams[tuple(sorted(s))].append(s)
+        return list(anagrams.values())
+
 
 def test_solution():
     assert Solution().groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]) == [["eat", "tea", "ate"],
