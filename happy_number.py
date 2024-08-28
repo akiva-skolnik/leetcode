@@ -11,11 +11,23 @@ class Solution:
         Return true if n is a happy number, and false if not."""
         seen = set()
         while n > 1:
-            n = sum(int(d) ** 2 for d in str(n))
+            n = self.get_next(n)  # or self.get_next2(n)
             if n in seen:
                 return False
             seen.add(n)
         return n == 1
+
+    @staticmethod
+    def get_next(number: int) -> int:
+        total_sum = 0
+        while number > 0:
+            number, digit = divmod(number, 10)
+            total_sum += digit ** 2
+        return total_sum
+
+    @staticmethod
+    def get_next2(number: int) -> int:
+        return sum(int(d) ** 2 for d in str(number))
 
 
 def test_solution():
