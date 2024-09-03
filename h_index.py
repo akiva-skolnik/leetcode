@@ -8,8 +8,11 @@ class Solution:
             received for their ith paper, return the maximum value of h such that the given researcher has published at
             least h papers that have each been cited at least h times."""
         citations.sort(reverse=True)
-        return max((h for h, c in enumerate(citations, 1) if c >= h), default=0)
+        return next((i+1 for i in reversed(range(len(citations))) if citations[i] >= i+1), 0)
 
+    def hIndex2(self, citations: List[int]) -> int:
+        citations.sort(reverse=True)
+        return max((i for i, c in enumerate(citations, 1) if c >= i), default=0)
 
 def test_1():
     citations = [3, 0, 6, 1, 5]
