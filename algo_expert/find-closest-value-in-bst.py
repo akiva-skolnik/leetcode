@@ -1,14 +1,8 @@
 import sys
+from binary_tree_utils import BinaryTree, build_tree
 
 
-class BST:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-
-
-def findClosestValueInBst(tree: BST, target: int) -> int or None:
+def findClosestValueInBst(tree: BinaryTree, target: int) -> int or None:
     """return the closest value to the target in the BST"""
     if not tree:
         return None
@@ -27,20 +21,6 @@ def findClosestValueInBst(tree: BST, target: int) -> int or None:
     return closest_right
 
 
-def build_tree(nodes, root):
-    tree = {}
-    for node in nodes:
-        tree[node["id"]] = BST(node["value"])
-
-    for node in nodes:
-        if node["left"]:
-            tree[node["id"]].left = tree[node["left"]]
-        if node["right"]:
-            tree[node["id"]].right = tree[node["right"]]
-
-    return tree[root]
-
-
 def test_1():
     nodes = [
         {"id": "10", "left": "5", "right": "15", "value": 10},
@@ -54,7 +34,7 @@ def test_1():
         {"id": "1", "left": None, "right": None, "value": 1}
     ]
     root = "10"
-    tree = build_tree(nodes, root)
+    tree = build_tree({"nodes": nodes, "root": root})
 
     target = 12
     expected = 13
@@ -92,7 +72,7 @@ def test_2_3():
     ]
 
     root = "100"
-    tree = build_tree(nodes, root)
+    tree = build_tree({"nodes": nodes, "root": root})
 
     # test 2
     target = 100

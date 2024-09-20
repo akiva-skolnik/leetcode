@@ -1,36 +1,19 @@
 # https://www.algoexpert.io/questions/validate-bst
 import sys
-
-
-# This is an input class. Do not edit.
-class BST:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+from binary_tree_utils import BinaryTree, build_tree
 
 
 def validateBst(tree):
     return validateBstRec(tree, -sys.maxsize, sys.maxsize)
 
 
-def validateBstRec(tree: BST, father_left_val: int, father_right_val: int) -> bool:
+def validateBstRec(tree: BinaryTree, father_left_val: int, father_right_val: int) -> bool:
     if not tree:
         return True
     if not father_left_val <= tree.value < father_right_val:
         return False
     return validateBstRec(tree.left, father_left_val, tree.value) and \
         validateBstRec(tree.right, tree.value, father_right_val)
-
-
-def build_tree(nodes: list) -> BST:
-    nodes_dict = {node['id']: BST(node['value']) for node in nodes}
-    for node in nodes:
-        if node['left']:
-            nodes_dict[node['id']].left = nodes_dict[node['left']]
-        if node['right']:
-            nodes_dict[node['id']].right = nodes_dict[node['right']]
-    return nodes_dict[nodes[0]['id']]
 
 
 def test():
@@ -199,5 +182,5 @@ def test():
                        'root': '10'}, 'expected': False}]
 
     for test in tests:
-        tree, expected = build_tree(test['tree']['nodes']), test['expected']
+        tree, expected = build_tree(test['tree']), test['expected']
         assert validateBst(tree) == expected, f"expected {expected} for {test['tree']}"
