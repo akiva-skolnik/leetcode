@@ -17,4 +17,4 @@ def test():
     for test in tests:
         array, expected = test['array'], test['expected']
         assert productSum(array) == expected, f"expected {expected} for {array}"
-test()
+

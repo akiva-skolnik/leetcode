@@ -1,5 +1,6 @@
 # https://www.algoexpert.io/questions/validate-bst
 import sys
+
 from binary_tree_utils import BinaryTree, build_tree
 
 
